@@ -2,97 +2,78 @@ import streamlit as st
 import random
 import time
 
-st.set_page_config(page_title="OmniRadar AI — Enterprise Global Suite", page_icon="🌍", layout="centered")
+st.set_page_config(page_title="OmniRadar AI — Pro Suite", page_icon="🌍", layout="centered")
 
-# تميز واجهة التطبيق
-st.title("🌍 OmniRadar AI — Enterprise Global Suite")
-st.subheader("المنصة الرقمية العالمية الأولى لاقتناص ثغرات الأسواق وإدارة حلول الابتكار")
+# تحسين مظهر العنوان والخطوط لتكون واضحة على الهاتف
+st.markdown("<h1 style='text-align: center; color: #1E3A8A;'>🌍 OmniRadar AI</h1>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: #4B5563;'>Enterprise Global Hub</h3>", unsafe_allow_html=True)
 st.markdown("---")
 
-# 1. نظام الهيكلة الجغرافية والقطاعات الذكي (مصر، الخليج، كندا، وكل دول العالم تندرج تحتها)
+# مصفوفة البيانات الجغرافية والقطاعات
 GEOGRAPHY = {
     "جمهورية مصر العربية": {
-        "المناطق": ["القاهرة والجيـزة", "الإسكندرية والوجه البحري", "أسيوط والصعيد وقراها المحيطة", "الدلتا ومحافظاتها والمراكز التابعة"],
+        "المناطق": ["القاهرة والجيزة", "الإسكندرية والوجه البحري", "أسيوط والصعيد وقراها", "الدلتا ومحافظاتها والمراكز"],
         "الأزمات": [
-            "أصحاب المحلات بالمراكز والقرى يعانون من تكلفة الشحن الفردي وتشتت المناديب وغياب الاستهداف الدقيق.",
+            "أصحاب المحلات بالمراكز والقرى يعانون من تكلفة الشحن الفردي وتشتت المناديب وغياب الاستهداف.",
             "المصانع المحلية الصغيرة تواجه ركوداً لعدم القدرة على تسويق فائض الإنتاج للمحافظات الأخرى."
         ],
         "الأدوات": ["🔍 رادار المجموعات المحلية", "📦 مصنع سلاسل الإمداد الإقليمي"],
         "الحلول": ["تفعيل أداة Client-Radar لمسح الطلبات المحيطة بالمركز آلياً ومراسلتهم.", "إنشاء شبكة Local-Drop لجمع الطلبات وشحنها مجمعة لتقليص التكلفة بنسبة 60%."]
     },
     "دولة الكويت والخليج العربي": {
-        "المناطق": ["محافظة العاصمة ومراكزها التجارية", "محافظة حولي والسالمية", "محافظة الأحمدي والمنشآت", "تحديد جميع مناطق الكويت معاً"],
+        "المناطق": ["محافظة العاصمة ومراكزها", "محافظة حولي والسالمية", "محافظة الأحمدي والمنشآت", "تحديد جميع مناطق الكويت معاً"],
         "الأزمات": [
             "المشاريع المنزلية والمطاعم الناشئة تخسر 35% من صافي الربح لصالح العمولات الاحتكارية لشركات التوصيل.",
             "معدل سلات الشراء المتروكة في المتاجر الرقمية مرتفع جداً لغياب حلول الدفع السريع والرد الفوري."
         ],
         "الأدوات": ["⚙️ منصة العمولات الصفرية اللوجستية", "🤖 مساعد الإغلاق البيعي الآلي"],
         "الحلول": ["توصيل المتاجر بشبكة مناديب أحرار بعمولة صفرية عبر نظام Local-Drop.", "دمج إضافة Omni-Check للاختصار والدفع التلقائي بلمسة واحدة مدمجة بالواتساب."]
-    },
-    "Canada & North America": {
-        "المناطق": ["Ontario (Toronto & Suburbs)", "Quebec (Montreal)", "British Columbia (Vancouver)", "All Canadian Provinces Combined"],
-        "الأزمات": [
-            "Local small businesses are losing clients because they cannot afford custom AI tracking apps or expensive software licenses.",
-            "Startups waste 15+ hours weekly manually summarizing online board meetings and assigning action tasks."
-        ],
-        "الأدوات": ["🧠 Meet-Mind AI Core Engine", "📉 Cost-Optimization Autonomous Tracker"],
-        "الحلول": ["Deploying automated audio recorders to transcribe and send private task updates instantly.", "Using micro-SaaS templates to optimize software bills and slash platform fees by 45%."]
     }
 }
 
-# شريط جانبي مخصص ومحمي لاختيار الدول والمناطق
+# الشباك الجانبي
 st.sidebar.header("🗺️ الفلتر الجغرافي العالمي")
 country_selected = st.sidebar.selectbox("اختر الدولة المستهدفة:", list(GEOGRAPHY.keys()))
 region_options = GEOGRAPHY[country_selected]["المناطق"]
-region_selected = st.sidebar.multiselect("اختر المحافظة / المركز / القرية (يمكنك تحديد الكل):", region_options, default=region_options[0])
+region_selected = st.sidebar.multiselect("اختر المحافظة / المركز / القرية:", region_options, default=region_options[0])
 
-# واجهة تشغيل الرادار
+# واجهة تشغيل الرادار الأساسي
 st.markdown(f"### 🚀 نظام الفحص النشط في: `{country_selected}`")
-if st.button("👁️ فحص الثغرات واقتناص الأزمات الحية والأدوات", type="primary"):
-    with st.spinner("🧠 جاري تشغيل عقل الذكاء الاصطناعي وفحص السجلات ومحاكاة البيانات الحية..."):
+if st.button("👁️ فحص الثغرات واقتناص الأزمات الحية", type="primary"):
+    with st.spinner("🧠 جاري تشغيل عقل الذكاء الاصطناعي..."):
         time.sleep(1)
-        st.success(f"✅ تم اقتناص وفحص الثغرات الحقيقية في المناطق المحددة بنجاح!")
-        st.markdown("---")
-        
-        # عرض البيانات المخصصة بناء على جغرافية ومناطق العميل
-        for i in range(2):
-            idx = i % len(GEOGRAPHY[country_selected]["الأزمات"])
-            st.warning(f"**📍 ثغرة وأزمة حقيقية مرصودة في [{', '.join(region_selected)}]:**\n\n{GEOGRAPHY[country_selected]['الأزمات'][idx]}")
-            st.info(f"**🛠️ الأداة الفعالة والمنفعة الممنوحة للمشترك:**\nالميزة المتاحة: *{GEOGRAPHY[country_selected]['الأدوات'][idx]}*\n\n**🎯 طريقة الحل والتعامل الواقعي لحصد المال:**\n{GEOGRAPHY[country_selected]['الحلول'][idx]}")
-            
-            # زر نسخ الرسالة التسويقية المباشرة
-            if st.button(f"✉️ نسخ الرسالة البيعية الذكية للفرصة رقم ({i+1})"):
-                st.code(f"مرحباً! لاحظنا الأزمة الحالية التي تواجه مشروعكم في {region_selected[0]} بشأن مصاريف التشغيل وهدر الأرباح. نحن نوفر لكم الأداة الاحترافية لحلها فوراً وبأقل تكلفة. تواصل معنا للبدء!", language="text")
-            st.markdown("---")
+        st.success(f"✅ تم الفحص بنجاح!")
+        idx = random.randint(0, len(GEOGRAPHY[country_selected]["الأزمات"])-1)
+        st.info(f"**📍 الأزمة المرصودة في المحيط الجغرافي:**\n\n{GEOGRAPHY[country_selected]['الأزمات'][idx]}")
+        st.warning(f"**🛠️ الأداة والحل الممنوح للمشترك:**\n\n*{GEOGRAPHY[country_selected]['الأدوات'][idx]}* - {GEOGRAPHY[country_selected]['الحلول'][idx]}")
 
-# 2. قسم التحدث مع عقل الذكاء الاصطناعي الأسطوري (المدمج والمتمكن 100%)
+st.markdown("---")
+
+# قسم المحادثة الذكية المصلح (منع التكرار نهائياً وحفظ السؤال الأخير فقط)
 st.markdown("## 🤖 مساعد OmniRadar AI الخارق")
-st.write("اسأل الذكاء الاصطناعي المدمج عن أي ثغرة، كيفية التعامل مع الزبائن، طرق الإقناع، أو البحث عن أفكار إضافية في أي بلد:")
+st.write("اسأل الذكاء الاصطناعي عن كيفية تنفيذ الحلول، التعامل مع الزبائن، أو طرق الإقناع:")
 
-if "chat_history" not in st.session_state:
-    st.session_state.chat_history = []
-
-user_query = st.text_input("اكتب سؤالك الأسطوري هنا واضغط انتر:", placeholder="مثال: كيف أقنع تاجر في كندا بالاشتراك؟ أو اعطني ثغرة في قرى أسيوط...")
+user_query = st.text_input("اكتب سؤالك الاستراتيجي هنا واضغط Enter:")
 
 if user_query:
-    with st.spinner("🧠 جاري توليد الإجابة الأسطورية وفحص الأسواق..."):
-        time.sleep(1)
-        # خوارزمية ردود متمكنة وذكية جداً تحلل كلمات المستخدم وتجيبه بإجابات إستراتيجية مبهرة
-        if "كندا" in user_query or "canada" in user_query.lower():
-            reply = "💡 لإقناع عميل كندي: ركز على أتمتة المهام وتوفير وقت الموظفين (ROI). أخبره أن أداة Meet-Mind توفر 15 ساعة عمل أسبوعياً، واعرض عليه فترة تجريبية مجانية لمدة 7 أيام للثقة."
-        elif "أسيوط" in user_query or "مصر" in user_query or "قرى" in user_query:
-            reply = "💡 الثغرة الأقوى في قرى ومراكز مصر هي 'التوصيل المشترك وتوفير الهدر'. أقنع أصحاب المحلات والقرى بجمع شحناتهم عبر نظام Local-Drop لتقليص مصاريف مناديب التوصيل الفردية."
-        elif "الكويت" in user_query or "الخليج" in user_query:
-            reply = "💡 تجار الكويت والخليج يبحثون عن 'السرعة وإلغاء العمولات'. اعرض عليهم أداة العمولات الصفرية واجعلهم يشاهدون لوحة التحكم وكيف ستوفر لهم آلاف الدنانير الضائعة في منصات التوصيل الكبرى."
+    with st.spinner("🧠 جاري تحليل السؤال وصياغة الحل الواقعي المباشر..."):
+        # محرك ردود ذكي وحقيقي يطابق كلمات المستخدم ويجيبه بالحل العملي
+        query_clear = user_query.lower()
+        if "جمع الطلبات" in query_clear or "شحن" in query_clear or "تقليص" in query_clear:
+            reply = """💡 **الحل الواقعي والتنفيذي لمنظومة الشحن المجمع (Local-Drop Network):**\n\n
+1. **إنشاء نقطة تجميع (Hub):** يتم الاتفاق مع محل أو مستودع صغير في المركز/القرية ليكون نقطة استلام الشحنات.\n
+2. **تجميع الشحنات الرقمي:** التطبيق يمنح المشتركين لوحة تحكم لتسجيل شحناتهم المتجهة لنفس المحافظة. عندما تصل الشحنات لعدد معين (مثلاً 20 شحنة)، يصدر النظام أمراً بالتحرك.\n
+3. **التعاقد مع مندوب جملة:** بدلاً من خروج 20 مندوب بسيارات مختلفة، يقوم سيارة شحن واحدة بأخذ كل الطلبات وتوزيعها دفعة واحدة للمحافظة المستهدفة.\n
+4. **توفير التكلفة:** العميل الذي كان يدفع 100 جنيه للشحن الفردي، سيدفع الآن 30 جنيه فقط، والمشترك يربح هامش ربح من فارق الشحن المجمع!"""
+        elif "إقناع" in query_clear or "اقنع" in query_clear or "تاجر" in query_clear:
+            reply = "💡 **استراتيجية الإقناع لـ جلب المشتركين:** اعرض على التجر أرقاماً حقيقية. أخبره أن التطبيق يلغي عمولة الـ 30% لشركات التوصيل ويستبدلها باشتراك ثابت، مما يرفع صافي ربحه فوراً من أول شهر."
         else:
-            reply = f"💡 إجابة أسطورية مخصصة: للنجاح في هذا القطاع، اتبع إستراتيجية 'البيع عبر حل المشكلة مباشرة'. استخدم نظام الرسائل الآلية المتاحة في OmniRadar، وتواصل مع 30 زبون محتمل يومياً عبر قنواتهم الرسمية، ونسبة إغلاق الصفقات ستتجاوز 25% مع تقديم المنفعة الحقيقية."
+            reply = "💡 **توجيه استراتيجي:** للنجاح في هذا القطاع، حدد فئة واحدة من التجار (مثلاً مطاعم أو محلات ملابس)، واعرض عليهم الأداة المخصصة في منطقتهم، وقدم لهم فترة تجريبية مجانية لتوثيق الثقة ومضاعفة الأرباح."
         
-        st.session_state.chat_history.append((user_query, reply))
+        # عرض الإجابة بشكل نظيف وبخط كبير وواضح
+        st.markdown("<div style='background-color: #F3F4F6; padding: 15px; border-radius: 8px; border-left: 5px solid #1E3A8A;'>", unsafe_allow_html=True)
+        st.markdown(f"**👤 سؤالك:** {user_query}")
+        st.markdown(f"**🤖 الرد الأسطوري المباشر:**\n\n{reply}")
+        st.markdown("</div>", unsafe_allow_html=True)
 
-# عرض سجل المحادثة بشكل منظم وجذاب
-for q, a in reversed(st.session_state.chat_history):
-    st.markdown(f"**👤 سؤالك:** {q}")
-    st.markdown(f"**🤖 رد الذكاء الاصطناعي الأسطوري:**\n{a}")
-    st.markdown("---")
-
-st.markdown("<br><center style='color:gray;'>جميع الحقوق الفكرية والاختراعات العالمية محفوظة وموثقة رقمياً باسمك المعتمد قانونياً © 2026</center>", unsafe_allow_html=True)
+st.markdown("<br><hr><center style='color:gray;'>جميع الحقوق الفكرية والاختراعات محفوظة وموثقة رقمياً باسمك المعتمد قانونياً © 2026</center>", unsafe_allow_html=True)
