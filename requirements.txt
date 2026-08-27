@@ -1,1 +1,4 @@
-duckduckgo_search==6.2.13
+streamlit>=1.28.0
+duckduckgo_search>=6.2.13
+python-dotenv>=1.0.0
+requests>=2.31.0
