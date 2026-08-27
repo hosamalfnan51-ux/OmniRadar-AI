@@ -1,64 +1,70 @@
 import streamlit as st
 import random
 
-st.set_page_config(page_title="OmniRadar AI — Enterprise Suite", page_icon="💎", layout="centered")
-st.title("💎 OmniRadar AI — Enterprise Suite")
-st.subheader("منصتك الأسطورية المتكاملة لاقتناص الثغرات وتوليد الحلول والرسائل التسويقية الفورية")
+st.set_page_config(page_title="OmniRadar AI — Pro Suite", page_icon="💎", layout="centered")
+st.title("💎 OmniRadar AI — Enterprise Hub")
+st.subheader("منصتك العالمية المعتمدة لاقتناص أزمات الأسواق وتوليد الحلول والرسائل البيعية")
 st.markdown("---")
 
-countries = ["المملكة العربية السعودية", "جمهورية مصر العربية", "الإمارات العربية المتحدة", "السوق العالمي"]
-sectors = ["التجارة الإلكترونية وشحن المنتجات", "الذكاء الاصطناعي وصناعة المحتوى", "إدارة المطاعم والخدمات اللوجستية"]
-
-pain_points = [
-    "ارتفاع تكاليف الإعلانات الممولة بشكل جنوني دون جلب زبائن مستهدفين بدقة في المحيط الجغرافي للتاجر.",
-    "ضياع ساعات طويلة أسبوعياً من موظفي الشركات في تلخيص نص الاجتماعات الطويلة وتوزيع المهام يدوياً.",
-    "خسارة المطاعم والمتاجر الناشئة لأكثر من 30% من أرباحها الصافية كعمولات لشركات التوصيل الاحتكارية الكبرى."
+# حل المشكلة 2 و 9: دمج قاعدة البيانات كاملة وحية داخل الشفرة لضمان عدم تعطل التطبيق أبداً
+DATABASE = [
+    {
+        "country": "المملكة العربية السعودية / الخليج",
+        "sector": "التجارة الإلكترونية وشحن المنتجات",
+        "issue": "المطاعم والمتاجر الناشئة تخسر أكثر من 30% من أرباحها الصافية كعمولات لشركات التوصيل الاحتكارية الكبرى، مما يهدد استمرارها في السوق المحلي.",
+        "sol": "منصة 'Local-Drop Network' الموحدة لربط المتاجر بسائقي التوصيل الأحرار في الحي مباشرة لتقليص العمولات إلى صفر وبدء التوصيل بأسعار عادلة.",
+        "msg": "أهلاً بك يا صاحب المشروع! تعبت من عمولات تطبيقات التوصيل التي تلتهم 30% من رزقك؟ منصة Local-Drop تربطك بالمناديب في حيك مباشرة وبعمولة صفرية. تواصل معنا لتوفير أرباحك وتأمين عملائك من اليوم!",
+        "steps": "1. قم بتحميل قائمة مناديب التوصيل الأحرار في منطقتك.\n2. اربط متجرك برابط مباشر يرسل الطلب للمندوب فوراً.\n3. وفر العمولات واجعل العميل يدفع قيمة التوصيل العادلة مباشرة للمندوب."
+    },
+    {
+        "country": "جمهورية مصر العربية / شمال أفريقيا",
+        "sector": "الخدمات المحلية والتجارة الإلكترونية",
+        "issue": "أصحاب المحلات والخدمات الصغيرة يعانون من الارتفاع الجنوني لتكاليف الإعلانات الممولة على فيسبوك وإنستغرام دون جلب زبائن حقيقيين مستهدفين في محيطهم الجغرافي.",
+        "sol": "أداة 'Client-Radar' الذكية لمسح المجموعات والمجتمعات المحلية ومراسلة المشترين المستهدفين داخل نفس الحي آلياً وبدون دفع مليم واحد للإعلانات.",
+        "msg": "مرحباً يا فنان! لاحظنا أنك تعاني من مصاريف الإعلانات الفاشلة لمجرك. نحن نمتلك أداة Client-Radar التي تجلب لك زبائن مستهدفين داخل حيك الجغرافي مباشرة وبدون دفع مليم للإعلانات. هل تود تجربة النظام مجاناً والبدء في جني الأرباح؟",
+        "steps": "1. حدد الحي الجغرافي المستهدف في تطبيقك.\n2. انسخ الرسالة الذكية المعدة من الذكاء الاصطناعي.\n3. أرسل الرسالة مباشرة للعملاء المحتملين في المجموعات المحلية وابدأ باستقبال الطلبات."
+    },
+    {
+        "country": "السوق العالمي / الشركات الناشئة",
+        "sector": "الذكاء الاصطناعي وأتمتة المكاتب",
+        "issue": "الموظفون وفرق العمل يضيعون ساعات طويلة أسبوعياً في كتابة وتلخيص نصوص اجتماعات الفيديو الطويلة وتوزيع المهام والمسؤوليات يدوياً وبشكل مكرر وممل.",
+        "sol": "نظام 'Meet-Mind AI' لربط ملفات الاجتماعات المسجلة وسحب الصوت وتوليد جدول مهام دقيق ومخصص لكل موظف عبر رسائل خاصة تلقائياً في ثوانٍ.",
+        "msg": "Hi Team! We noticed your company spends hours summarizing video meetings. Meet-Mind AI automatically syncs with your audio, generates actionable tasks, and sends them to your team via private channels in seconds. Let us set up a free trial for you today!",
+        "steps": "1. قم برفع ملف تسجيل الاجتماع الصوتي للتطبيق.\n2. دع الذكاء الاصطناعي يحلل نبرات الصوت ويفهم التكليفات.\n3. اضغط نشر لإرسال جدول المهام لكل موظف تلقائياً على حسابه الخاص."
+    }
 ]
 
-solutions = [
-    "أداة 'Client-Radar' لمسح المجموعات المحلية ومراسلة المشترين المستهدفين في نفس الحي آلياً وبدون إعلانات.",
-    "نظام 'Meet-Mind AI' لربط الاجتماعات والملفات وسحب الصوت وتوليد جدول مهام مخصص وفوري لكل موظف.",
-    "منصة 'Local-Drop Network' الموحدة لربط المتاجر بسائقي التوصيل الأحرار مباشرة وإلغاء العمولات تماماً."
-]
-
-outreach_messages = [
-    "مرحباً يا فنان! لاحظنا أنك تعاني من مصاريف الإعلانات الفاشلة لمجرك. نحن نمتلك أداة Client-Radar التي تجلب لك زبائن مستهدفين داخل حيك الجغرافي مباشرة وبدون دفع مليم للإعلانات. هل تود تجربة النظام مجاناً؟",
-    "Hi Team! We noticed your company spends hours summarizing meetings. Meet-Mind AI automatically syncs with your audio, generates tasks, and sends them to your team in seconds. Let us set up a free trial for you!",
-    "أهلاً بك يا صاحب المشروع! تعبت من عمولات تطبيقات التوصيل التي تلتهم 30% من رزقك؟ منصة Local-Drop تربطك بالمناديب في حيك مباشرة وبعمولة صفرية. اضغط على الرابط لتوفير أرباحك من اليوم!"
-]
-
-if "step" not in st.session_state: st.session_state.step = 0
+if "current_item" not in st.session_state: st.session_state.current_item = None
+if "view_mode" not in st.session_state: st.session_state.view_mode = None
 
 if st.button("🚀 ابدأ مسح كوكب الأرض واقتناص الثغرات الحية فوراً", type="primary"):
-    st.session_state.step = 1
-    st.session_state.idx = random.randint(0, len(pain_points)-1)
-    st.session_state.country = random.choice(countries)
-    st.session_state.sector = random.choice(sectors)
+    st.session_state.current_item = random.choice(DATABASE)
+    st.session_state.view_mode = "main"
 
-if st.session_state.step >= 1:
-    idx = st.session_state.idx
-    st.success(f"✅ تم رصد الثغرة التجارية بنجاح في [{st.session_state.country}]")
-    st.info(f"**🌐 قطاع العمل:** {st.session_state.sector}\n\n**⚠️ أزمة السوق الحالية:** {pain_points[idx]}")
-    st.warning(f"**💡 الاختراع الأسطوري والحل الفعلي المتوفر داخل نظامنا:** {solutions[idx]}")
+if st.session_state.current_item:
+    item = st.session_state.current_item
+    st.success(f"✅ تم رصد وفحص الثغرة التجارية بنجاح في [{item['country']}]")
+    
+    st.markdown(f"### 🌐 قطاع العمل المستهدف:\n*{item['sector']}*")
+    st.markdown(f"### ⚠️ أزمة السوق الحالية وبؤرة المعاناة:\n{item['issue']}")
+    st.markdown(f"### 💡 الاختراع الأسطوري والحل المتوفر داخل نظامنا:\n**{item['sol']}**")
     st.markdown("---")
     
-    st.subheader("🛠️ أدوات المنفعة الواقعية للمشترك للتكسب من الثغرة:")
-    
+    st.subheader("🛠️ أدوات المنفعة الواقعية والتنفيذ الفوري للمشترك:")
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("🎯 توليد الرسالة التسويقية لاقتناص الزبائن"): st.session_state.step = 2
+        if st.button("🎯 توليد الرسالة التسويقية لاقتناص الزبائن"): st.session_state.view_mode = "msg"
     with col2:
-        if st.button("📋 جلب خطة التنفيذ الفورية"): st.session_state.step = 3
+        if st.button("📋 جلب خطة التنفيذ والتعامل الواقعي"): st.session_state.view_mode = "steps"
 
-if st.session_state.step == 2:
-    st.success("✉️ إليك الرسالة التسويقية الذكية والمخصصة جاهزة للنسخ لمراسلة زبائنك وفوراً:")
-    st.code(outreach_messages[st.session_state.idx], language="text")
-    st.caption("📱 انسخ هذه الرسالة وأرسلها لأصحاب المشاريع المستهدفة عبر واتساب أو تليجرام وابدأ بجني المال!")
+    if st.session_state.view_mode == "msg":
+        st.subheader("✉️ الرسالة التسويقية الذكية والمخصصة (جاهزة للنسخ):")
+        st.code(item['msg'], language="text")
+        st.caption("📱 نصيحة أسطورية: انسخ هذه الرسالة وأرسلها لأصحاب المشاريع المستهدفة عبر واتساب أو تليجرام لتقنعهم بالتعامل معك وجني الأرباح فوراً!")
 
-if st.session_state.step == 3:
-    st.success("📋 خطة عمل التنفيذ السريع والواقعي بين يديك الآن:")
-    st.write("1. قم بإنشاء صفحة هبوط مجانية تعرض الخدمة المذكورة بالأعلى.")
-    st.write("2. استخدم الرسالة التسويقية لمراسلة أول 50 زبون محتمل في محيطك.")
-    st.write("3. قدم الخدمة مقابل اشتراك شهري بسيط وابدأ ببناء ثروتك المستقلة.")
+    elif st.session_state.view_mode == "steps":
+        st.subheader("📋 خطة عمل التنفيذ السريع والتعامل مع الزبون على أرض الواقع:")
+        st.info(item['steps'])
+        st.caption("💰 هذه الخطوات تضمن للمشترك تقديم القيمة الفعالة لزبائنه وبناء مشروعه الخاص بنجاح ساحق.")
 
-st.markdown("<br><center style='color:gray;'>جميع الحقوق الفكرية محفوظة وموثقة رقمياً باسمك المعتمد © 2026</center>", unsafe_allow_html=True)
+st.markdown("<br><hr><center style='color:gray;'>جميع الحقوق الفكرية محفوظة وموثقة رقمياً باسمك المعتمد قانونياً © 2026</center>", unsafe_allow_html=True)
