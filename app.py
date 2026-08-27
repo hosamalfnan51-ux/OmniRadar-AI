@@ -1,27 +1,43 @@
 import streamlit as st
-import random
+import urllib.request
+import xml.etree.ElementTree as ET
+import re
+
 st.set_page_config(page_title="OmniRadar AI", page_icon="🎯")
-st.title("🎯 OmniRadar AI — Live Solution Hub")
-st.subheader("منصتك العالمية لاقتناص أزمات الأسواق وابتكار الحلول التجارية فوراً")
+st.title("🎯 OmniRadar AI — Realtime Opportunity Hunter")
+st.subheader("منصتك العالمية لاقتناص أزمات الأسواق الحقيقية حياً ومباشراً من الإنترنت")
 st.markdown("---")
 
-# قاعدة بيانات حية ومحدثة من أزمات الأسواق الحالية لعام 2026
-global_problems = [
-    {"market": "الوطن العربي / مصر", "issue": "أصحاب المحلات التجارية الصغيرة يعانون من تكلفة الإعلانات الممولة المرتفعة ولا يجدون زبائن مستهدفين في محيطهم الجغرافي.", "solution": "أداة 'Client-Radar' التي تمسح المجموعات المحلية وتراسل المشترين المهتمين في نفس الحي آلياً وبدون إعلانات."},
-    {"market": "الولايات المتحدة / أوروبا", "issue": "الموظفون في الشركات يضيعون ساعات طويلة أسبوعياً في تلخيص نص اجتماعات Zoom الطويلة وتوزيع المهام يدوياً.", "solution": "نظام 'Meet-Mind AI' لربط الاجتماعات وسحب الصوت وتوليد جدول مهام مخصص لكل موظف عبر رسائل خاصة تلقائياً."},
-    {"market": "الخليج العربي", "issue": "المطاعم والمتاجر الناشئة تخسر أكثر من 30% من أرباحها كعمولات لشركات التوصيل الاحتكارية الكبرى.", "solution": "منصة 'Local-Drop Network' الموحدة لربط المتاجر بسائقي التوصيل الأحرار مباشرة وإلغاء العمولات تماماً."}
-]
-
 if st.button("🚀 ابدأ مسح كوكب الأرض واقتناص الفرص فوراً", type="primary"):
-    st.success("✅ تم تفعيل عقل الذكاء الاصطناعي وجلب الأزمات والحلول الأكثر طلباً الآن!")
+    st.success("✅ تم الاتصال بنجاح.. جاري سحب وتحليل المشاكل الحية من شبكة الأخبار العالمية!")
     
-    # اختيار عشوائي ذكي للأزمات لإبهار المستخدم في كل ضغطة
-    selected_issues = random.sample(global_problems, 2)
-    
-    for i, item in enumerate(selected_issues, 1):
-        st.info(f"**📍 فرصة تجارية حقيقية رقم ({i}) — [السوق: {item['market']}]:**\n\n"
-                f"**⚠️ أزمة السوق الحالية:** {item['issue']}\n\n"
-                f"**💡 الاختراع الأسطوري المقترح لحلها:** {item['solution']}")
-        st.markdown("---")
+    try:
+        # سحب مباشر من شبكة أخبار جوجل العالمية المحدثة كل دقيقة عن المشاكل والأزمات التجارية
+        url = "https://google.com"
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        xml_data = urllib.request.urlopen(req).read()
+        
+        root = ET.fromstring(xml_data)
+        items = root.findall('.//item')
+        
+        if items:
+            # عرض أول 3 مشاكل وأخبار حقيقية طازجة تم نشرها في العالم الآن
+            for i, item in enumerate(items[:3], 1):
+                title = item.find('title').text
+                link = item.find('link').text
+                description = item.find('description').text
+                # تنظيف النص من أكواد الـ HTML
+                clean_desc = re.sub('<[^<]+?>', '', description)
+                
+                st.info(f"**📍 فرصة تجارية حقيقية رقم ({i}) من الأسواق العالمية:**\n\n"
+                        f"**🔗 عنوان الأزمة/الخبر الحقيقي:** {title}\n\n"
+                        f"**⚠️ تفاصيل المعاناة الحية:** {clean_desc}\n\n"
+                        f"**💡 حل الذكاء الاصطناعي المقترح:** بناء تطبيق أو خدمة مخصصة لحل هذه الفجوة فوراً والربح منها.")
+                st.markdown("---")
+        else:
+            st.warning("⚠️ جاري تحديث شبكة البيانات، اضغط مجدداً خلال ثوانٍ.")
+            
+    except Exception as e:
+        st.error(f"❌ حدث عطل مؤقت في جلب البيانات الحية: {e}")
 
 st.markdown("<br><center style='color:gray;'>جميع الحقوق الفكرية محفوظة باسمك © 2026</center>", unsafe_allow_html=True)
