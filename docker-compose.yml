@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  omni-radar:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: omni-radar-ai
+    ports:
+      - "8501:8501"
+    environment:
+      - STREAMLIT_SERVER_HEADLESS=true
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      - LOG_LEVEL=INFO
+      - ENVIRONMENT=production
+    volumes:
+      - ./logs:/app/logs
+      - ./data:/app/data
+    restart: unless-stopped
+    networks:
+      - omni-network
+
+networks:
+  omni-network:
+    driver: bridge
